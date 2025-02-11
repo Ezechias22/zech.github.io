@@ -1,0 +1,84 @@
+/* Formulaire de contact */
+form {
+    background-color: #f0f0f0;
+    border-radius: 10px;
+    padding: 20px;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Couleurs du formulaire : Bleu et Rouge */
+label {
+    color: #003366; /* Bleu foncé */
+    font-weight: bold;
+    display: block;
+    margin-bottom: 10px;
+}
+
+input[type="text"],
+input[type="email"],
+textarea {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+/* Couleur du bouton de soumission */
+input[type="submit"] {
+    background-color: #e60000; /* Rouge */
+    color: white;
+    font-size: 16px;
+    padding: 15px 25px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s;
+}
+
+input[type="submit"]:hover {
+    background-color: #cc0000; /* Rouge foncé */
+}
+
+/* Style des champs lors de la saisie */
+input[type="text"]:focus,
+input[type="email"]:focus,
+textarea:focus {
+    border-color: #003366; /* Bleu clair */
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 51, 102, 0.5);
+}
+
+/* Style général du texte */
+body {
+    font-family: Arial, sans-serif;
+    color: #333;
+    background-color: #fff;
+    margin: 0;
+    padding: 0;
+}
+
+/* Titre du formulaire */
+h2 {
+    text-align: center;
+    color: #003366; /* Bleu foncé */
+    margin-bottom: 20px;
+}
+
+/* Section de confirmation après l'envoi */
+.success {
+    color: green;
+    font-weight: bold;
+    text-align: center;
+}
+
+.error {
+    color: red;
+    font-weight: bold;
+    text-align: center;
+}

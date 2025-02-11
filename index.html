@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accueil - Zechia</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles2.css">
+
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2023569258267325"
+     crossorigin="anonymous"></script>
+
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Zechia</h1>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="actualites.html">Actualités</a></li>
+                    <li><a href="politique.html">Politique</a></li>
+                    <li><a href="economie.html">Économie</a></li>
+                    <li><a href="culture.html">Culture</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <section class="carousel">
+        <div class="carousel-container">
+            <div class="carousel-slide">
+                <div class="slide">
+                    <img src="image1.jpg" alt="Image 1" onclick="openLightbox(this)">
+                </div>
+                <div class="slide">
+                    <video src="video1.mp4" controls onclick="openLightbox(this)"></video>
+                </div>
+                <div class="slide">
+                    <img src="image2.jpg" alt="Image 2" onclick="openLightbox(this)">
+                </div>
+            </div>
+        </div>
+        <button class="prev" onclick="moveSlide(-1)">&#10094;</button>
+        <button class="next" onclick="moveSlide(1)">&#10095;</button>
+    </section>
+    
+    <!-- Lightbox (popup) -->
+    <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+        <span class="close">&times;</span>
+        <img id="lightbox-img">
+        <video id="lightbox-video" controls></video>
+    </div>
+
+    <main>
+        <div class="container">
+            <section class="articles">
+                <article>
+                    <h2>Bienvenue sur Zechia</h2>
+                    <p>Découvrez les dernières nouvelles et analyses.</p>
+                    <a href="index.html">Lire la suite</a>
+                </article>
+                <article>
+                    <h2>L'Île de la Gonave : Un Potentiel Économique en Croissance</h2>
+                    <p>L'île de la Gonave, située à l'ouest de la capitale Port-au-Prince, est de plus en plus perçue comme un centre stratégique pour le développement économique d'Haïti...</p>
+                    <a href="gonave.html">Lire la suite</a>
+                </article>
+                <article>
+                    <h2>Culture et traditions haïtiennes</h2>
+                    <p>Explorez les richesses culturelles d'Haïti à travers ses musiques, danses et traditions...</p>
+                    <a href="culture.html">Lire la suite</a>
+                </article>
+                <article>
+                    <h2>Découvrez les paysages d'Haïti</h2>
+                    <img src="image-haiti.jpg" alt="Paysages d'Haïti">
+                    <p>Haïti possède des paysages magnifiques, allant des plages aux montagnes. Découvrez les différents sites naturels à travers ce reportage...</p>
+                    <a href="paysage_d'haiti.html">Lire la suite</a>
+                </article>
+            </section>
+        </div>
+    </main>
+
+    <!-- Bloc d'annonce AdSense -->
+    <div style="text-align: center; margin: 20px 0;">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-2023569258267325"
+             data-ad-slot="XXXXXXXXXX" 
+             data-ad-format="auto"></ins>
+        <script>
+             (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Zechia - Tous droits réservés.</p>
+            <div class="footer-author">Conçu par Zechia</div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+
+</body>
+</html>

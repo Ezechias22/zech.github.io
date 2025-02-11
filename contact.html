@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - Zechia</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles2.css">
+    <link rel="stylesheet" href="styles3.css">  <!-- Ajout du nouveau fichier CSS -->
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Zechia</h1>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="actualites.html">Actualités</a></li>
+                    <li><a href="politique.html">Politique</a></li>
+                    <li><a href="economie.html">Économie</a></li>
+                    <li><a href="culture.html">Culture</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <section class="contact-info">
+                <h2>Contactez-nous</h2>
+                <p>Si vous avez des questions ou des demandes, n'hésitez pas à nous contacter en remplissant le formulaire ci-dessous. Nous serons ravis de vous répondre.</p>
+
+                <h3>Informations de Contact</h3>
+                <ul>
+                    <li><strong>Adresse :</strong> 03 coridore  keno, Anse a galets,La Gonave, Haïti</li>
+                    <li><strong>Téléphone :</strong> +509 41529915</li>
+                    <li><strong>Email :</strong> contact@zechia.com</li>
+                </ul>
+            </section>
+
+            
+            <form action="process_form.php" method="POST">
+                <h2>Contactez-nous</h2>
+                <label for="name">Nom :</label>
+                <input type="text" id="name" name="name" required>
+                
+                <label for="email">Email :</label>
+                <input type="email" id="email" name="email" required>
+                
+                <label for="message">Message :</label>
+                <textarea id="message" name="message" rows="4" required></textarea>
+                
+                <input type="submit" value="Envoyer">
+            </form>
+            
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Zechia - Tous droits réservés.</p>
+            <div class="footer-author">Conçu par Zechia</div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
