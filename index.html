@@ -3,16 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Zechia - Actualités sur l'économie, la politique et la culture en Haïti.">
-    <meta name="keywords" content="Haïti, actualités, économie, politique, culture, Île de la Gonave">
-    <meta name="google-adsense-account" content="ca-pub-2023569258267325">
     <title>Accueil - Zechia</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="styles2.css">
 
-    <!-- Google AdSense -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2023569258267325"
-     crossorigin="anonymous"></script>
+    <!-- SEO et AdSense -->
+    <meta name="description" content="Zechia - Découvrez les actualités, l'économie et la culture haïtienne.">
+    <meta name="keywords" content="Haïti, Actualités, Économie, Culture, Zechia">
+    <meta name="google-adsense-account" content="ca-pub-2023569258267325">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2023569258267325" crossorigin="anonymous"></script>
 </head>
 <body>
     <header>
@@ -34,67 +33,56 @@
     <section class="carousel">
         <div class="carousel-container">
             <div class="carousel-slide">
-                <div class="slide"><img src="image1.jpg" alt="Image 1" onclick="openLightbox(this)"></div>
-                <div class="slide"><video src="video1.mp4" controls onclick="openLightbox(this)"></video></div>
-                <div class="slide"><img src="image2.jpg" alt="Image 2" onclick="openLightbox(this)"></div>
+                <div class="slide"><img src="image1.jpg" alt="Image 1"></div>
+                <div class="slide"><video src="video1.mp4" controls></video></div>
+                <div class="slide"><img src="image2.jpg" alt="Image 2"></div>
             </div>
         </div>
-        <button class="prev" onclick="moveSlide(-1)">&#10094;</button>
-        <button class="next" onclick="moveSlide(1)">&#10095;</button>
+        <button class="prev">&#10094;</button>
+        <button class="next">&#10095;</button>
     </section>
     
-    <!-- Lightbox (popup) -->
-    <div id="lightbox" class="lightbox" onclick="closeLightbox()">
-        <span class="close">&times;</span>
-        <img id="lightbox-img">
-        <video id="lightbox-video" controls></video>
-    </div>
-
     <main>
-        <div class="container">
-            <section class="articles">
-                <article>
-                    <h2>Bienvenue sur Zechia</h2>
-                    <p>Découvrez les dernières nouvelles et analyses.</p>
-                    <a href="index.html">Lire la suite</a>
-                </article>
-                <article>
-                    <h2>L'Île de la Gonave : Un Potentiel Économique en Croissance</h2>
-                    <p>L'île de la Gonave est un centre stratégique pour le développement économique d'Haïti...</p>
-                    <a href="gonave.html">Lire la suite</a>
-                </article>
-                <article>
-                    <h2>Culture et traditions haïtiennes</h2>
-                    <p>Découvrez la richesse culturelle d'Haïti à travers sa musique et ses traditions...</p>
-                    <a href="culture.html">Lire la suite</a>
-                </article>
-                <article>
-                    <h2>Découvrez les paysages d'Haïti</h2>
-                    <img src="image-haiti.jpg" alt="Paysages d'Haïti">
-                    <p>Explorez les magnifiques paysages naturels haïtiens.</p>
-                    <a href="paysage_d'haiti.html">Lire la suite</a>
-                </article>
-            </section>
-        </div>
+        <section class="about">
+            <h2>À propos de Zechia</h2>
+            <p>Zechia est une plateforme dédiée à l'actualité, la culture et l'économie haïtienne.</p>
+        </section>
+        
+        <section class="articles">
+            <article>
+                <h2>Bienvenue sur Zechia</h2>
+                <p>Découvrez les dernières nouvelles et analyses.</p>
+                <a href="index.html">Lire la suite</a>
+            </article>
+            <article>
+                <h2>L'Île de la Gonave : Un Potentiel Économique</h2>
+                <p>Un centre stratégique pour le développement économique d'Haïti...</p>
+                <a href="gonave.html">Lire la suite</a>
+            </article>
+        </section>
+
+        <section class="testimonials">
+            <h2>Témoignages</h2>
+            <div class="testimonial">
+                <p>"Zechia est ma source principale d'actualités sur Haïti !" - Jean D.</p>
+            </div>
+            <div class="testimonial">
+                <p>"Superbe plateforme pour suivre l'économie haïtienne." - Marie S.</p>
+            </div>
+        </section>
+        
+        <section class="newsletter">
+            <h2>Inscrivez-vous à notre Newsletter</h2>
+            <form>
+                <input type="email" placeholder="Votre email" required>
+                <button type="submit">S'inscrire</button>
+            </form>
+        </section>
     </main>
-
-    <!-- Bloc d'annonce AdSense -->
-    <div class="ads-container">
-        <ins class="adsbygoogle"
-             style="display:block"
-             data-ad-client="ca-pub-2023569258267325"
-             data-ad-slot="1234567890" 
-             data-ad-format="auto"></ins>
-        <script>
-             (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
-    </div>
-
+    
     <footer>
-        <div class="container">
-            <p>&copy; 2025 Zechia - Tous droits réservés.</p>
-            <div class="footer-author">Conçu par Zechia</div>
-        </div>
+        <p>&copy; 2025 Zechia - Tous droits réservés.</p>
+        <p>Conçu par Zechia</p>
     </footer>
 
     <script src="script.js"></script>
