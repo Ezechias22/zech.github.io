@@ -5,88 +5,481 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Accueil - Zechia</title>
     <link rel="stylesheet" href="styles.css">
-<link rel="stylesheet" href="indexstyles.css">
-
+    <link rel="stylesheet" href="indexstyles.css">
     <link rel="stylesheet" href="styles2.css">
-
+    <!-- Font Awesome pour les icônes -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
     <!-- SEO et AdSense -->
     <meta name="description" content="Zechia - Découvrez les actualités, l'économie et la culture haïtienne.">
-    <meta name="keywords" content="Haïti, Actualités, Économie, Culture, Zechia">
+    <meta name="keywords" content="Haïti, Actualités, Économie, Culture, Zechia, Politique haïtienne, Île de la Gonave">
     <meta name="google-adsense-account" content="ca-pub-2023569258267325">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2023569258267325" crossorigin="anonymous"></script>
+    <!-- Open Graph pour les partages sociaux -->
+    <meta property="og:title" content="Zechia - Actualités, Économie et Culture haïtienne">
+    <meta property="og:description" content="Découvrez les dernières actualités et analyses sur Haïti.">
+    <meta property="og:image" content="logo.jpg">
+    <meta property="og:url" content="https://www.zechia.com">
 </head>
 <body>
     <header>
         <div class="container">
-            <h1>Zechia</h1>
-            <nav>
+            <div class="header-top">
+                <div class="logo">
+                    <h1>Zechia</h1>
+                </div>
+                <div class="mobile-menu-toggle" id="menuToggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+                <div class="desktop-actions">
+                    <div class="search-bar">
+                        <form>
+                            <input type="text" placeholder="Rechercher...">
+                            <button type="submit"><i class="fas fa-search"></i></button>
+                        </form>
+                    </div>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <nav id="mainNav">
                 <ul>
-                    <li><a href="index.html">Accueil</a></li>
-                    <li><a href="actualites.html">Actualités</a></li>
+                    <li><a href="index.html" class="active">Accueil</a></li>
+                    <li class="dropdown">
+                        <a href="actualites.html">Actualités <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="actualites-locales.html">Locales</a></li>
+                            <li><a href="actualites-internationales.html">Internationales</a></li>
+                            <li><a href="faits-divers.html">Faits divers</a></li>
+                        </ul>
+                    </li>
                     <li><a href="politique.html">Politique</a></li>
                     <li><a href="economie.html">Économie</a></li>
-                    <li><a href="culture.html">Culture</a></li>
+                    <li class="dropdown">
+                        <a href="culture.html">Culture <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="arts.html">Arts</a></li>
+                            <li><a href="musique.html">Musique</a></li>
+                            <li><a href="traditions.html">Traditions</a></li>
+                        </ul>
+                    </li>
                     <li><a href="contact.html">Contact</a></li>
                 </ul>
             </nav>
         </div>
     </header>
     
+    <div class="breaking-news">
+        <div class="container">
+            <span class="label">À LA UNE</span>
+            <div class="news-ticker">
+                <ul>
+                    <li>Haïti : Nouvelles initiatives pour le développement économique</li>
+                    <li>La diaspora haïtienne mobilisée pour des projets d'infrastructure</li>
+                    <li>Festival culturel prévu pour le mois prochain à Port-au-Prince</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
     <section class="carousel">
         <div class="carousel-container">
             <div class="carousel-slide">
-                <div class="slide"><img src="image1.jpg" alt="Image 1"></div>
-                <div class="slide"><video src="video1.mp4" controls></video></div>
-                <div class="slide"><img src="image2.jpg" alt="Image 2"></div>
+                <div class="slide">
+                    <img src="image1.jpg" alt="Image 1">
+                    <div class="slide-caption">
+                        <h3>Développement durable en Haïti</h3>
+                        <p>Nouvelles stratégies et partenariats internationaux</p>
+                        <a href="#" class="btn">Lire l'article</a>
+                    </div>
+                </div>
+                <div class="slide">
+                    <video src="video1.mp4" controls></video>
+                    <div class="slide-caption">
+                        <h3>Interview exclusive avec le Ministre de la Culture</h3>
+                        <p>Perspectives sur le patrimoine culturel haïtien</p>
+                        <a href="#" class="btn">Voir la vidéo</a>
+                    </div>
+                </div>
+                <div class="slide">
+                    <img src="image2.jpg" alt="Image 2">
+                    <div class="slide-caption">
+                        <h3>L'Île de la Gonave : Un joyau économique</h3>
+                        <p>Découvrez le potentiel inexploité de cette région</p>
+                        <a href="gonave.html" class="btn">Lire l'article</a>
+                    </div>
+                </div>
             </div>
         </div>
-        <button class="prev">&#10094;</button>
-        <button class="next">&#10095;</button>
+        <button class="carousel-arrow prev" aria-label="Précédent"><i class="fas fa-chevron-left"></i></button>
+        <button class="carousel-arrow next" aria-label="Suivant"><i class="fas fa-chevron-right"></i></button>
+        <div class="carousel-indicators">
+            <span class="indicator active"></span>
+            <span class="indicator"></span>
+            <span class="indicator"></span>
+        </div>
     </section>
     
-    <main>
-        <section class="about">
-            <h2>À propos de Zechia</h2>
-            <p>Zechia est une plateforme dédiée à l'actualité, la culture et l'économie haïtienne.</p>
-        </section>
+    <main class="container">
+        <div class="main-grid">
+            <div class="main-content">
+                <section class="about">
+                    <h2>À propos de Zechia</h2>
+                    <p>Zechia est une plateforme dédiée à l'actualité, la culture et l'économie haïtienne. Notre mission est de fournir une information de qualité et de promouvoir la richesse culturelle d'Haïti à travers le monde.</p>
+                    <a href="about.html" class="read-more">En savoir plus <i class="fas fa-arrow-right"></i></a>
+                </section>
+                
+                <section class="featured-articles">
+                    <h2>Articles à la une</h2>
+                    <div class="articles-grid">
+                        <article class="article-card">
+                            <div class="article-image">
+                                <img src="article1.jpg" alt="Article 1">
+                                <span class="category">Économie</span>
+                            </div>
+                            <div class="article-content">
+                                <h3>L'Île de la Gonave : Un Potentiel Économique</h3>
+                                <p class="meta"><i class="far fa-calendar"></i> 28 Février 2025 | <i class="far fa-user"></i> Par Jean Michel</p>
+                                <p>Un centre stratégique pour le développement économique d'Haïti, l'île de la Gonave offre des opportunités uniques pour les investisseurs...</p>
+                                <a href="gonave.html" class="read-more">Lire la suite <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </article>
+                        
+                        <article class="article-card">
+                            <div class="article-image">
+                                <img src="article2.jpg" alt="Article 2">
+                                <span class="category">Culture</span>
+                            </div>
+                            <div class="article-content">
+                                <h3>Le Rara : Tradition et Modernité</h3>
+                                <p class="meta"><i class="far fa-calendar"></i> 27 Février 2025 | <i class="far fa-user"></i> Par Marie Paul</p>
+                                <p>Cette tradition musicale haïtienne évolue tout en préservant son essence culturelle authentique...</p>
+                                <a href="rara.html" class="read-more">Lire la suite <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </article>
+                        
+                        <article class="article-card">
+                            <div class="article-image">
+                                <img src="article3.jpg" alt="Article 3">
+                                <span class="category">Politique</span>
+                            </div>
+                            <div class="article-content">
+                                <h3>Réformes Administratives : Les Nouveaux Enjeux</h3>
+                                <p class="meta"><i class="far fa-calendar"></i> 26 Février 2025 | <i class="far fa-user"></i> Par Pierre Louis</p>
+                                <p>Analyse des récentes réformes et leur impact sur la gouvernance nationale...</p>
+                                <a href="reformes.html" class="read-more">Lire la suite <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </article>
+                    </div>
+                </section>
+            </div>
+            
+            <aside class="sidebar">
+                <div class="widget popular-posts">
+                    <h3>Articles populaires</h3>
+                    <ul>
+                        <li>
+                            <img src="popular1.jpg" alt="Popular 1">
+                            <div>
+                                <h4><a href="#">Le tourisme à Jacmel reprend son essor</a></h4>
+                                <span><i class="far fa-eye"></i> 1245 vues</span>
+                            </div>
+                        </li>
+                        <li>
+                            <img src="popular2.jpg" alt="Popular 2">
+                            <div>
+                                <h4><a href="#">Artisanat haïtien : Un marché en croissance</a></h4>
+                                <span><i class="far fa-eye"></i> 980 vues</span>
+                            </div>
+                        </li>
+                        <li>
+                            <img src="popular3.jpg" alt="Popular 3">
+                            <div>
+                                <h4><a href="#">Interview avec un chef cuisinier haïtien</a></h4>
+                                <span><i class="far fa-eye"></i> 875 vues</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="widget categories">
+                    <h3>Catégories</h3>
+                    <ul>
+                        <li><a href="#">Actualités <span>(24)</span></a></li>
+                        <li><a href="#">Politique <span>(18)</span></a></li>
+                        <li><a href="#">Économie <span>(15)</span></a></li>
+                        <li><a href="#">Culture <span>(21)</span></a></li>
+                        <li><a href="#">Sports <span>(9)</span></a></li>
+                        <li><a href="#">Diaspora <span>(12)</span></a></li>
+                    </ul>
+                </div>
+                
+                <div class="widget newsletter-widget">
+                    <h3>Newsletter</h3>
+                    <p>Inscrivez-vous pour recevoir nos dernières actualités et articles</p>
+                    <form class="newsletter-form">
+                        <input type="text" placeholder="Votre nom" required>
+                        <input type="email" placeholder="Votre email" required>
+                        <button type="submit" class="btn">S'inscrire <i class="fas fa-paper-plane"></i></button>
+                    </form>
+                </div>
+                
+                <div class="widget advertisement">
+                    <h3>Publicité</h3>
+                    <div class="ad-space">
+                        <span>Espace publicitaire disponible</span>
+                        <a href="contact.html" class="btn btn-small">Nous contacter</a>
+                    </div>
+                </div>
+            </aside>
+        </div>
         
-        <section class="articles">
-            <article>
-                <h2>Bienvenue sur Zechia</h2>
-                <p>Découvrez les dernières nouvelles et analyses.</p>
-                <a href="index.html">Lire la suite</a>
-            </article>
-            <article>
-                <h2>L'Île de la Gonave : Un Potentiel Économique</h2>
-                <p>Un centre stratégique pour le développement économique d'Haïti...</p>
-                <a href="gonave.html">Lire la suite</a>
-            </article>
-        </section>
-
         <section class="testimonials">
             <h2>Témoignages</h2>
-            <div class="testimonial">
-                <p>"Zechia est ma source principale d'actualités sur Haïti !" - Jean D.</p>
+            <div class="testimonials-slider">
+                <div class="testimonial">
+                    <div class="testimonial-content">
+                        <i class="fas fa-quote-left"></i>
+                        <p>"Zechia est ma source principale d'actualités sur Haïti ! J'apprécie particulièrement la qualité des analyses économiques."</p>
+                        <div class="testimonial-author">
+                            <img src="person1.jpg" alt="Jean D.">
+                            <div>
+                                <h4>Jean Dupont</h4>
+                                <span>Entrepreneur</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial">
+                    <div class="testimonial-content">
+                        <i class="fas fa-quote-left"></i>
+                        <p>"Superbe plateforme pour suivre l'économie haïtienne. Les articles sont bien documentés et offrent des perspectives intéressantes."</p>
+                        <div class="testimonial-author">
+                            <img src="person2.jpg" alt="Marie S.">
+                            <div>
+                                <h4>Marie Saint-Louis</h4>
+                                <span>Économiste</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial">
+                    <div class="testimonial-content">
+                        <i class="fas fa-quote-left"></i>
+                        <p>"En tant que membre de la diaspora, Zechia me permet de rester connecté à l'actualité de mon pays d'origine. Merci pour ce travail remarquable."</p>
+                        <div class="testimonial-author">
+                            <img src="person3.jpg" alt="Pierre M.">
+                            <div>
+                                <h4>Pierre Michel</h4>
+                                <span>Professeur</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="testimonial">
-                <p>"Superbe plateforme pour suivre l'économie haïtienne." - Marie S.</p>
+            <div class="testimonial-arrows">
+                <button class="testimonial-arrow prev"><i class="fas fa-chevron-left"></i></button>
+                <button class="testimonial-arrow next"><i class="fas fa-chevron-right"></i></button>
             </div>
         </section>
         
-        <section class="newsletter">
-            <h2>Inscrivez-vous à notre Newsletter</h2>
-            <form>
-                <input type="email" placeholder="Votre email" required>
-                <button type="submit">S'inscrire</button>
-            </form>
+        <section class="partners">
+            <h2>Nos partenaires</h2>
+            <div class="partners-logo">
+                <img src="partner1.jpg" alt="Partenaire 1">
+                <img src="partner2.jpg" alt="Partenaire 2">
+                <img src="partner3.jpg" alt="Partenaire 3">
+                <img src="partner4.jpg" alt="Partenaire 4">
+                <img src="partner5.jpg" alt="Partenaire 5">
+            </div>
         </section>
     </main>
     
+    <section class="call-to-action">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Rejoignez notre communauté</h2>
+                <p>Restez informé des dernières actualités et recevez du contenu exclusif</p>
+                <a href="#" class="btn btn-large">S'abonner</a>
+            </div>
+        </div>
+    </section>
+    
     <footer>
-        <p>&copy; 2025 Zechia - Tous droits réservés.</p>
-        <p>Conçu par Zechia</p>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-about">
+                    <h3>Zechia</h3>
+                    <p>Votre source d'information fiable sur l'actualité, l'économie et la culture haïtienne.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>Liens rapides</h3>
+                    <ul>
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="actualites.html">Actualités</a></li>
+                        <li><a href="politique.html">Politique</a></li>
+                        <li><a href="economie.html">Économie</a></li>
+                        <li><a href="culture.html">Culture</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>Services</h3>
+                    <ul>
+                        <li><a href="publicite.html">Publicité</a></li>
+                        <li><a href="partenariats.html">Partenariats</a></li>
+                        <li><a href="presse.html">Salle de presse</a></li>
+                        <li><a href="emplois.html">Offres d'emploi</a></li>
+                        <li><a href="newsletter.html">Newsletter</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-contact">
+                    <h3>Contact</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> Port-au-Prince, Haïti</li>
+                        <li><i class="fas fa-phone"></i> +509 xxxx xxxx</li>
+                        <li><i class="fas fa-envelope"></i> contact@zechia.com</li>
+                    </ul>
+                    <a href="contact.html" class="btn">Nous contacter</a>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Zechia - Tous droits réservés.</p>
+                <div class="footer-bottom-links">
+                    <a href="confidentialite.html">Politique de confidentialité</a>
+                    <a href="cookies.html">Cookies</a>
+                    <a href="mentions.html">Mentions légales</a>
+                </div>
+            </div>
+        </div>
     </footer>
-
+    
+    <div class="scroll-to-top" id="scrollTop">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+    
+    <div class="cookie-consent" id="cookieConsent">
+        <div class="container">
+            <p>Ce site utilise des cookies pour améliorer votre expérience. En continuant à naviguer, vous acceptez notre utilisation des cookies.</p>
+            <div class="cookie-buttons">
+                <button id="acceptCookies" class="btn">Accepter</button>
+                <a href="cookies.html" class="btn btn-outline">En savoir plus</a>
+            </div>
+        </div>
+    </div>
+    
     <script src="script.js"></script>
+    <script>
+        // Code pour le menu mobile
+        document.getElementById('menuToggle').addEventListener('click', function() {
+            document.getElementById('mainNav').classList.toggle('active');
+            this.classList.toggle('active');
+        });
+        
+        // Script pour le carrousel
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.carousel-slide .slide');
+        const indicators = document.querySelectorAll('.carousel-indicators .indicator');
+        
+        function showSlide(n) {
+            // Masquer toutes les slides
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].style.display = 'none';
+                indicators[i].classList.remove('active');
+            }
+            
+            // Afficher la slide courante
+            currentSlide = (n + slides.length) % slides.length;
+            slides[currentSlide].style.display = 'block';
+            indicators[currentSlide].classList.add('active');
+        }
+        
+        document.querySelector('.carousel .next').addEventListener('click', () => showSlide(currentSlide + 1));
+        document.querySelector('.carousel .prev').addEventListener('click', () => showSlide(currentSlide - 1));
+        
+        // Changer de slide automatiquement toutes les 5 secondes
+        setInterval(() => showSlide(currentSlide + 1), 5000);
+        
+        // Initialiser le carrousel
+        showSlide(0);
+        
+        // Scroll to top
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 300) {
+                document.getElementById('scrollTop').classList.add('visible');
+            } else {
+                document.getElementById('scrollTop').classList.remove('visible');
+            }
+        });
+        
+        document.getElementById('scrollTop').addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Gestion des cookies
+        document.getElementById('acceptCookies').addEventListener('click', function() {
+            document.getElementById('cookieConsent').style.display = 'none';
+            localStorage.setItem('cookiesAccepted', 'true');
+        });
+        
+        // Vérifier si l'utilisateur a déjà accepté les cookies
+        if (localStorage.getItem('cookiesAccepted') === 'true') {
+            document.getElementById('cookieConsent').style.display = 'none';
+        }
+        
+        // Gestion du bandeau de news
+        const newsTicker = document.querySelector('.news-ticker ul');
+        let newsTickerPosition = 0;
+        
+        function moveNewsTicker() {
+            newsTickerPosition -= 1;
+            if (newsTickerPosition <= -newsTicker.firstElementChild.offsetWidth) {
+                newsTickerPosition = 0;
+                newsTicker.appendChild(newsTicker.firstElementChild);
+            }
+            newsTicker.style.transform = `translateX(${newsTickerPosition}px)`;
+            requestAnimationFrame(moveNewsTicker);
+        }
+        
+        moveNewsTicker();
+        
+        // Gestion du slider de témoignages
+        let currentTestimonial = 0;
+        const testimonials = document.querySelectorAll('.testimonials-slider .testimonial');
+        
+        function showTestimonial(n) {
+            for (let i = 0; i < testimonials.length; i++) {
+                testimonials[i].style.display = 'none';
+            }
+            
+            currentTestimonial = (n + testimonials.length) % testimonials.length;
+            testimonials[currentTestimonial].style.display = 'block';
+        }
+        
+        document.querySelector('.testimonial-arrows .next').addEventListener('click', () => showTestimonial(currentTestimonial + 1));
+        document.querySelector('.testimonial-arrows .prev').addEventListener('click', () => showTestimonial(currentTestimonial - 1));
+        
+        // Initialiser le slider de témoignages
+        showTestimonial(0);
+    </script>
 </body>
 </html>
