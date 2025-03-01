@@ -22,7 +22,7 @@
 
 body {
     font-family: var(--font-primary);
-    color: var(--bg-color);
+    color: #333(--bg-color);
     line-height: 1.6;
 }
 
