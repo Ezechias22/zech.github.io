@@ -1,0 +1,55 @@
+lovingo/
+├── android/
+│   ├── app/
+│   │   ├── src/
+│   │   │   └── main/
+│   │   │       ├── AndroidManifest.xml
+│   │   │       ├── res/
+│   │   │       └── java/com/lovingo/app/
+│   │   │           └── MainActivity.java
+│   │   └── build.gradle
+│   ├── build.gradle
+│   └── gradle.properties
+├── ios/
+│   ├── Runner/
+│   │   ├── Info.plist
+│   │   └── AppDelegate.swift
+│   └── Runner.xcworkspace/
+├── lib/
+│   ├── main.dart
+│   ├── config/
+│   │   ├── app_config.dart
+│   │   ├── firebase_config.dart
+│   │   └── webrtc_config.dart
+│   ├── core/
+│   │   ├── constants/
+│   │   ├── utils/
+│   │   ├── services/
+│   │   ├── models/
+│   │   └── algorithms/
+│   ├── features/
+│   │   ├── splash/
+│   │   ├── auth/
+│   │   ├── home/
+│   │   ├── profile/
+│   │   ├── chat/
+│   │   ├── calls/
+│   │   ├── gifts/
+│   │   ├── wallet/
+│   │   ├── premium/
+│   │   └── admin/
+│   ├── shared/
+│   │   ├── widgets/
+│   │   ├── animations/
+│   │   └── themes/
+│   └── data/
+│       ├── repositories/
+│       ├── datasources/
+│       └── models/
+├── assets/
+│   ├── images/
+│   ├── animations/
+│   ├── sounds/
+│   └── fonts/
+├── pubspec.yaml
+└── README.md

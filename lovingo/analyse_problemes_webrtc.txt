@@ -1,0 +1,1640 @@
+==========================================
+ANALYSE COMPLÈTE DES PROBLÈMES WEBRTC
+Projet: Lovingo
+Date: 2025-06-15 17:18:53
+==========================================
+
+=== 1. ANALYSE DES DÉPENDANCES ===
+PUBSPEC.YAML:
+name: lovingo
+description: Application de rencontre moderne avec cadeaux virtuels et live streaming WebRTC
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+  flutter: ">=3.10.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # ✅ COMMUNICATION WEBRTC
+  flutter_webrtc: ^0.14.1
+  web_socket_channel: ^3.0.3
+
+  # ✅ FIREBASE BACKEND
+  firebase_core: ^2.24.2
+  firebase_auth: ^4.15.3
+  cloud_firestore: ^4.13.6
+  firebase_storage: ^11.5.6
+  firebase_messaging: ^14.7.9
+  firebase_analytics: ^10.7.4
+  firebase_crashlytics: ^3.4.8
+
+  # ✅ PAIEMENT
+  flutter_stripe: ^9.4.0
+
+  # ✅ UI/ANIMATIONS
+  lottie: ^3.2.0
+  shimmer: ^3.0.0
+  rive: ^0.11.4
+  cached_network_image: ^3.3.1
+  smooth_page_indicator: ^1.1.0
+  confetti: ^0.7.0
+  flutter_staggered_grid_view: ^0.6.2
+
+  # ✅ NAVIGATION
+  go_router: ^10.1.2
+
+  # ✅ ÉTAT GLOBAL
+  riverpod: ^2.3.7
+  flutter_riverpod: ^2.6.1
+
+  # ✅ MÉDIA & CAMÉRA
+  image_picker: ^1.0.2
+  video_player: ^2.7.0
+  camera: ^0.10.5+2
+  photo_view: ^0.14.0
+
+  # ✅ AUDIO
+  audioplayers: ^6.4.0
+  just_audio: ^0.9.34
+  flutter_sound: ^9.28.0
+
+  # ✅ GÉOLOCALISATION
+  geolocator: ^10.1.1
+  geocoding: ^2.1.0
+
+  # ✅ PERMISSIONS
+  permission_handler: ^12.0.0+1
+
+  # ✅ STOCKAGE LOCAL
+  shared_preferences: ^2.2.0
+  hive: ^2.2.3
+  hive_flutter: ^1.1.0
+  path_provider: ^2.1.1
+
+  # ✅ UTILITAIRES
+  intl: ^0.20.2
+  uuid: ^3.0.7
+  dio: ^5.3.2
+  http: ^1.1.0
+  json_annotation: ^4.8.1
+
+  # ✅ PARTAGE & SOCIAL
+  share_plus: ^7.2.2
+  url_launcher: ^6.2.2
+
+  # ✅ NOTIFICATIONS
+  flutter_local_notifications: ^15.1.1
+
+  # ✅ ICÔNES
+  cupertino_icons: ^1.0.6
+  font_awesome_flutter: ^10.5.0
+  flutter_staggered_animations: ^1.1.1
+
+  # ✅ DEBUG & PERFORMANCE
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.3
+  build_runner: ^2.4.6
+  json_serializable: ^6.7.1
+  hive_generator: ^2.0.0
+
+  # ✅ TEST
+  mockito: ^5.4.2
+  integration_test:
+    sdk: flutter
+
+dependency_overrides:
+  pigeon: ^17.1.2
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/images/
+    - assets/animations/
+    - assets/sounds/
+    - assets/fonts/
+    - assets/icons/
+    - assets/images/icons/
+    - assets/images/avatars/
+    - assets/images/gifts/
+    - assets/images/backgrounds/
+    - assets/data/
+    - assets/sounds/incoming_call.mp3
+    - assets/sounds/outgoing_call.mp3
+    - assets/sounds/call_accept.mp3
+    - assets/sounds/call_decline.mp3
+    - assets/sounds/call_end.mp3
+    - assets/sounds/button_tap.mp3
+    - assets/sounds/notification.mp3
+    - assets/sounds/new_message.mp3
+    - assets/sounds/gift_received.mp3
+    - assets/sounds/gift_sent.mp3
+    - assets/sounds/live_start.mp3
+    - assets/sounds/live_end.mp3
+    - assets/sounds/user_joined.mp3
+    - assets/sounds/user_left.mp3
+    - assets/sounds/success.mp3
+    - assets/sounds/error.mp3
+    - assets/sounds/warning.mp3
+    - assets/sounds/combo.mp3
+    - assets/sounds/achievement.mp3
+    - assets/animations/gift_heart.json
+    - assets/animations/gift_diamond.json
+    - assets/animations/gift_crown.json
+    - assets/animations/gift_unicorn.json
+    - assets/animations/gift_rainbow.json
+    - assets/animations/live_streaming.json
+    - assets/animations/call_connecting.json
+    - assets/animations/loading.json
+
+  fonts:
+    - family: Poppins
+      fonts:
+        - asset: assets/fonts/Poppins-Regular.ttf
+        - asset: assets/fonts/Poppins-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/Poppins-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/Poppins-Bold.ttf
+          weight: 700
+    - family: Roboto
+      fonts:
+        - asset: assets/fonts/Roboto-Regular.ttf
+        - asset: assets/fonts/Roboto-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/Roboto-Bold.ttf
+          weight: 700
+
+flutter_intl:
+  enabled: true
+  class_name: S
+  main_locale: fr
+  arb_dir: lib/l10n
+  output_dir: lib/generated
+  use_deferred_loading: false
+
+
+DÉPENDANCES WEBRTC DÉTECTÉES:
+
+description: Application de rencontre moderne avec cadeaux virtuels et live streaming WebRTC
+  # ✅ COMMUNICATION WEBRTC
+  flutter_webrtc: ^0.14.1
+  web_socket_channel: ^3.0.3
+
+
+=== 2. ANALYSE DES CONFIGURATIONS ===
+
+--- FICHIER: lib/config/webrtc_config.dart ---
+✅ Configuration TURN/STUN détectée
+✅ Configuration ICE Servers présente
+// lib/config/webrtc_config.dart - CONFIGURATION WEBRTC COMPLÈTE avec XIRSYS - CORRIGÉ
+import 'package:flutter/foundation.dart';
+import 'package:flutter/src/widgets/icon_data.dart';
+import 'package:flutter_webrtc/flutter_webrtc.dart';
+
+class WebRTCConfig {
+  // ✅ MODE DÉVELOPPEMENT/PRODUCTION
+  static const bool isTestMode = true;
+  static const bool enableLogs = true;
+  
+  // 🚀 SERVEURS STUN/TURN XIRSYS OPÉRATIONNELS (TESTÉS ET FONCTIONNELS)
+  static const List<Map<String, String>> iceServers = [
+    // ✅ Serveurs STUN gratuits Google (backup)
+    {'urls': 'stun:stun.l.google.com:19302'},
+    {'urls': 'stun:stun1.l.google.com:19302'},
+    
+    // 🎯 SERVEUR STUN XIRSYS (TESTÉS ✅)
+    {'urls': 'stun:sp-turn1.xirsys.com'},
+    
+    // 🚀 SERVEURS TURN XIRSYS OPÉRATIONNELS (50GB gratuits/mois)
+    {
+      'urls': 'turn:sp-turn1.xirsys.com:80?transport=udp',
+      'username': '4XqUfvJjCtRe1GW3bd21W0shkuu5xsRShJenzbs1AkxjTsQY-Owmryb2cw1TSqEwAAAAAGhOy_dMb3Zpbmdv',
+      'credential': '8161ec3e-49ed-11f0-b1bd-0242ac120004'
+    },
+    {
+      'urls': 'turn:sp-turn1.xirsys.com:3478?transport=udp',
+      'username': '4XqUfvJjCtRe1GW3bd21W0shkuu5xsRShJenzbs1AkxjTsQY-Owmryb2cw1TSqEwAAAAAGhOy_dMb3Zpbmdv',
+      'credential': '8161ec3e-49ed-11f0-b1bd-0242ac120004'
+    },
+    {
+      'urls': 'turn:sp-turn1.xirsys.com:80?transport=tcp',
+      'username': '4XqUfvJjCtRe1GW3bd21W0shkuu5xsRShJenzbs1AkxjTsQY-Owmryb2cw1TSqEwAAAAAGhOy_dMb3Zpbmdv',
+      'credential': '8161ec3e-49ed-11f0-b1bd-0242ac120004'
+    },
+    {
+      'urls': 'turn:sp-turn1.xirsys.com:3478?transport=tcp',
+      'username': '4XqUfvJjCtRe1GW3bd21W0shkuu5xsRShJenzbs1AkxjTsQY-Owmryb2cw1TSqEwAAAAAGhOy_dMb3Zpbmdv',
+      'credential': '8161ec3e-49ed-11f0-b1bd-0242ac120004'
+    },
+    // 🔒 TURN TLS pour connexions sécurisées
+    {
+      'urls': 'turns:sp-turn1.xirsys.com:443?transport=tcp',
+      'username': '4XqUfvJjCtRe1GW3bd21W0shkuu5xsRShJenzbs1AkxjTsQY-Owmryb2cw1TSqEwAAAAAGhOy_dMb3Zpbmdv',
+      'credential': '8161ec3e-49ed-11f0-b1bd-0242ac120004'
+    },
+    {
+      'urls': 'turns:sp-turn1.xirsys.com:5349?transport=tcp',
+      'username': '4XqUfvJjCtRe1GW3bd21W0shkuu5xsRShJenzbs1AkxjTsQY-Owmryb2cw1TSqEwAAAAAGhOy_dMb3Zpbmdv',
+      'credential': '8161ec3e-49ed-11f0-b1bd-0242ac120004'
+    },
+  ];
+
+  // ✅ CONTRAINTES AUDIO OPTIMALES POUR LOVINGO
+  static const Map<String, dynamic> audioConstraints = {
+    'googEchoCancellation': true,
+    'googAutoGainControl': true,
+    'googNoiseSuppression': true,
+    'googHighpassFilter': true,
+    'googTypingNoiseDetection': true,
+    'googAudioMirroring': false,
+    // 🎤 Optimisations pour application de rencontres
+    'echoCancellation': true,
+    'noiseSuppression': true,
+    'autoGainControl': true,
+  };
+
+  // ✅ CONTRAINTES VIDÉO PAR QUALITÉ (optimisées pour rencontres)
+  static const Map<String, Map<String, dynamic>> videoConstraints = {
+    'low': {
+      'width': {'min': 320, 'ideal': 480, 'max': 640},
+      'height': {'min': 240, 'ideal': 360, 'max': 480},
+      'frameRate': {'min': 10, 'ideal': 15, 'max': 20},
+    },
+    'medium': {
+      'width': {'min': 480, 'ideal': 640, 'max': 1280},
+      'height': {'min': 360, 'ideal': 480, 'max': 720},
+      'frameRate': {'min': 15, 'ideal': 24, 'max': 30},
+    },
+    'high': {
+      'width': {'min': 640, 'ideal': 1280, 'max': 1920},
+      'height': {'min': 480, 'ideal': 720, 'max': 1080},
+      'frameRate': {'min': 24, 'ideal': 30, 'max': 60},
+    },
+  };
+
+  // 🚀 CONFIGURATION RTC PEER CONNECTION OPTIMISÉE
+  static Map<String, dynamic> get rtcConfiguration => {
+    'iceServers': iceServers,
+    'iceTransportPolicy': 'all',
+    'bundlePolicy': 'max-bundle',
+    'rtcpMuxPolicy': 'require',
+    'iceCandidatePoolSize': 10, // Plus de candidats pour meilleure connectivité
+    // 🔧 Optimisations pour réseaux mobiles
+    'iceConnectionReceiveTimeout': 20000,
+    'iceBackupCandidatePairPingInterval': 25000,
+  };
+
+  // ✅ CONTRAINTES MÉDIAS POUR APPELS 1-TO-1 LOVINGO
+  static Map<String, dynamic> getMediaConstraints({
+    bool video = true,
+    String videoQuality = 'medium',
+    bool audio = true,
+  }) {
+    return {
+      'audio': audio ? audioConstraints : false,
+      'video': video ? {
+        ...videoConstraints[videoQuality]!,
+        'facingMode': 'user', // Caméra frontale par défaut
+        // 💕 Optimisations pour app de rencontres
+        'googPowerLineFrequency': '2',
+        'googCpuOveruseDetection': true,
+      } : false,
+    };
+  }
+
+  // ✅ CONTRAINTES MÉDIAS POUR LIVE STREAMING
+  static Map<String, dynamic> getLiveStreamConstraints({
+    String videoQuality = 'high',
+    bool audio = true,
+  }) {
+    return {
+      'audio': audio ? {
+        ...audioConstraints,
+        'sampleRate': 48000,
+        'sampleSize': 16,
+        'channelCount': 2,
+      } : false,
+      'video': {
+        ...videoConstraints[videoQuality]!,
+        'facingMode': 'user',
+        // 📺 Paramètres spécifiques au streaming live
+        'googPowerLineFrequency': '2', // 50Hz EU
+        'googCpuOveruseDetection': true,
+        'googCpuUnderuseThreshold': 55,
+        'googCpuOveruseThreshold': 85,
+      },
+    };
+  }
+
+  // ✅ CONFIGURATION LIVE MULTI-INVITÉS (comme TikTok)
+  static const int maxGuestsInLive = 8; // Maximum d'invités simultanés
+  static const int defaultLiveQuality = 720; // Qualité par défaut du live
+  static const int maxViewersInLive = 10000; // Limite de viewers
+  static const int heartbeatInterval = 30; // Secondes entre heartbeats
+
+  // ✅ CONFIGURATION CADEAUX VIRTUELS
+  static const Map<String, dynamic> virtualGiftsConfig = {
+    'maxGiftsPerMinute': 10,
+    'animationDuration': 3000, // ms
+    'maxGiftsOnScreen': 5,
+    'giftEffectDuration': 2000, // ms
+  };
+
+  // ✅ URLS DU SIGNALING SERVER
+  static String get signalingServerUrl {
+    if (isTestMode) {
+      return 'ws://localhost:8080/ws'; // Serveur local de dev
+    } else {
+      return 'wss://lovingo-signaling.herokuapp.com/ws'; // Serveur de production
+    }
+  }
+
+  // ✅ URLs DES SERVICES FIREBASE FUNCTIONS
+  static const String baseFirebaseFunctionsUrl = isTestMode
+      ? 'http://localhost:5001/lovingo-app/us-central1'
+      : 'https://us-central1-lovingo-app.cloudfunctions.net';
+
+  // 🧪 MÉTHODE DE TEST DE CONNECTIVITÉ XIRSYS - CORRIGÉE
+  static Future<bool> testXirsysConnectivity() async {
+    try {
+      logInfo('🧪 Test de connectivité Xirsys...');
+      
+      final RTCPeerConnection pc = await createPeerConnection(rtcConfiguration);
+      
+      bool stunSuccess = false;
+      bool turnSuccess = false;
+      
+      pc.onIceCandidate = (RTCIceCandidate candidate) {
+        logInfo('🔗 Candidat ICE: ${candidate.candidate}');
+        
+        // ✅ CORRECTION : Vérifier le type de candidat correctement
+        if (candidate.candidate?.contains('typ srflx') == true) {
+          stunSuccess = true;
+          logInfo('✅ STUN Xirsys fonctionne !');
+        }
+        
+        if (candidate.candidate?.contains('typ relay') == true) {
+          turnSuccess = true;
+          logInfo('✅ TURN Xirsys fonctionne !');
+        }
+      };
+      
+      // Créer une offre pour déclencher la collecte ICE
+      await pc.createDataChannel('test', RTCDataChannelInit());
+      final RTCSessionDescription offer = await pc.createOffer();
+      await pc.setLocalDescription(offer);
+      
+      // Attendre 5 secondes pour collecter les candidats
+      await Future.delayed(const Duration(seconds: 5));
+      
+      await pc.close();
+      
+      if (stunSuccess && turnSuccess) {
+        logInfo('🎉 Xirsys complètement opérationnel !');
+        return true;
+      } else {
+        logError('⚠️ Connectivité Xirsys partielle - STUN: $stunSuccess, TURN: $turnSuccess');
+        return false;
+      }
+      
+    } catch (e) {
+      logError('❌ Test Xirsys échoué', e);
+      return false;
+    }
+  }
+
+  // ✅ VALIDATION DE LA CONFIGURATION
+  static void validateConfig() {
+    if (iceServers.isEmpty) {
+      throw Exception('Au moins un serveur ICE est requis');
+    }
+    
+    // Vérifier que Xirsys est configuré
+    final bool hasXirsysTurn = iceServers.any((server) => 
+      server['urls']?.contains('xirsys.com') == true && 
+      server['username'] != null
+    );
+    
+    if (!hasXirsysTurn) {
+      throw Exception('Configuration Xirsys TURN manquante');
+    }
+    
+    if (enableLogs) {
+      debugPrint('✅ Configuration WebRTC Lovingo validée');
+      debugPrint('📡 Serveurs ICE: ${iceServers.length}');
+      debugPrint('🎥 Qualités vidéo: ${videoConstraints.keys.join(', ')}');
+      debugPrint('🔴 Live max invités: $maxGuestsInLive');
+      debugPrint('🚀 Xirsys TURN configuré: $hasXirsysTurn');
+    }
+  }
+
+  // ✅ OBTENIR LA CONFIGURATION POUR UN TYPE D'APPEL - CORRIGÉ
+  static Map<String, dynamic> getConfigForCallType(WebRTCCallType callType) {
+    switch (callType) {
+      case WebRTCCallType.audio:
+        return getMediaConstraints(video: false, audio: true);
+      case WebRTCCallType.video:
+        return getMediaConstraints(video: true, audio: true, videoQuality: 'medium');
+      case WebRTCCallType.live:
+        return getLiveStreamConstraints(videoQuality: 'high', audio: true);
+      case WebRTCCallType.groupVideo:
+        return getMediaConstraints(video: true, audio: true, videoQuality: 'low');
+    }
+  }
+
+  // ✅ MÉTHODES UTILITAIRES AMÉLIORÉES
+  static bool get isConfigured => iceServers.isNotEmpty;
+  
+  static bool get hasXirsysConfig => iceServers.any((server) => 
+    server['urls']?.contains('xirsys.com') == true && 
+    server['username'] != null
+  );
+  
+  static void logDebug(String message) {
+    if (enableLogs && kDebugMode) {
+      debugPrint('🔧 WebRTC Lovingo: $message');
+    }
+  }
+
+  static void logError(String message, [dynamic error]) {
+    if (enableLogs) {
+      debugPrint('❌ WebRTC Lovingo Error: $message');
+      if (error != null) {
+        debugPrint('   Details: $error');
+      }
+    }
+  }
+
+  static void logInfo(String message) {
+    if (enableLogs) {
+      debugPrint('ℹ️ WebRTC Lovingo: $message');
+    }
+  }
+
+  // 🚀 MÉTHODE D'INITIALISATION RECOMMANDÉE
+  static Future<void> initialize() async {
+    try {
+      logInfo('🚀 Initialisation WebRTC Lovingo...');
+      
+      // Valider la configuration
+      validateConfig();
+      
+      // Tester la connectivité Xirsys en mode debug
+      if (kDebugMode) {
+        final bool xirsysWorking = await testXirsysConnectivity();
+        if (!xirsysWorking) {
+          logError('⚠️ Problème de connectivité Xirsys détecté');
+        }
+      }
+      
+      logInfo('✅ WebRTC Lovingo initialisé avec succès');
+      
+    } catch (e) {
+      logError('❌ Échec d\'initialisation WebRTC Lovingo', e);
+      rethrow;
+    }
+  }
+}
+
+// ✅ ENUM POUR LES TYPES D'APPEL (RENOMMÉ POUR ÉVITER LES CONFLITS)
+enum WebRTCCallType {
+  audio,
+  video,
+  live,        // Live streaming
+  groupVideo;
+
+  final IconData? icon;,  // Appel de groupe
+}
+
+// ✅ ENUM POUR LES QUALITÉS VIDÉO
+enum VideoQuality {
+  low,
+  medium,
+  high,
+}
+
+// ✅ ENUM POUR LES ÉTATS DE CONNEXION WEBRTC
+enum WebRTCConnectionState {
+  disconnected,
+  connecting,
+  connected,
+  reconnecting,
+  failed,
+  closed,
+}
+
+// ✅ EXTENSIONS UTILES - CORRIGÉES
+extension WebRTCCallTypeExtension on WebRTCCallType {
+  bool get isVideo => this == WebRTCCallType.video || this == WebRTCCallType.groupVideo || this == WebRTCCallType.live;
+  bool get isAudio => this == WebRTCCallType.audio;
+  bool get isLive => this == WebRTCCallType.live;
+  bool get isGroup => this == WebRTCCallType.groupVideo || this == WebRTCCallType.live;
+  
+  String get displayName {
+    switch (this) {
+      case WebRTCCallType.audio:
+        return 'Appel audio';
+      case WebRTCCallType.video:
+        return 'Appel vidéo';
+      case WebRTCCallType.live:
+        return 'Live streaming';
+      case WebRTCCallType.groupVideo:
+        return 'Appel de groupe';
+    }
+  }
+}
+
+extension VideoQualityExtension on VideoQuality {
+  String get name {
+    switch (this) {
+      case VideoQuality.low:
+        return 'low';
+      case VideoQuality.medium:
+        return 'medium';
+      case VideoQuality.high:
+        return 'high';
+    }
+  }
+  
+  String get displayName {
+    switch (this) {
+      case VideoQuality.low:
+        return 'Qualité basse (360p)';
+      case VideoQuality.medium:
+        return 'Qualité moyenne (720p)';
+      case VideoQuality.high:
+        return 'Qualité haute (1080p)';
+    }
+  }
+}
+
+--- FICHIER: lib/config/app_config.dart ---
+class AppConfig {
+  // Configuration Firebase
+  static const String firebaseProjectId = 'lovingo-app';
+  
+  // Configuration Stripe
+  static const String stripePublishableKey = 'pk_test_your_key_here';
+  static const String stripeSecretKey = 'sk_test_your_key_here';
+  
+  // Configuration API
+  static const String baseUrl = 'https://api.lovingo.app';
+  static const String websocketUrl = 'wss://ws.lovingo.app';
+  
+  
+  // Configuration de l'app
+  static const String appName = 'Lovingo';
+  static const String appVersion = '1.0.0';
+  
+  // Modes de développement
+  static const bool isDebug = true;
+  static const bool enableLogging = true;
+  
+  // Configuration des fonctionnalités
+  static const bool enablePremiumFeatures = true;
+  static const bool enableVideoCall = true;
+  static const bool enableGifts = true;
+  
+  // Limites de l'app
+  static const int maxPhotosPerUser = 9;
+  static const int maxDistanceKm = 100;
+  static const int minAge = 18;
+  static const int maxAge = 99;
+  
+  // Configuration des cadeaux
+  static const int dailyFreeCredits = 10;
+  static const int welcomeBonus = 100;
+}
+
+
+--- FICHIER: lib/firebase_options.dart ---
+// File generated by FlutterFire CLI.
+// ignore_for_file: lines_longer_than_80_chars, avoid_classes_with_only_static_members
+import 'package:firebase_core/firebase_core.dart' show FirebaseOptions;
+import 'package:flutter/foundation.dart'
+    show defaultTargetPlatform, kIsWeb, TargetPlatform;
+
+/// Default [FirebaseOptions] for use with your Firebase apps.
+///
+/// Example:
+/// `dart
+/// import 'firebase_options.dart';
+/// // ...
+/// await Firebase.initializeApp(
+///   options: DefaultFirebaseOptions.currentPlatform,
+/// );
+/// `
+class DefaultFirebaseOptions {
+  static FirebaseOptions get currentPlatform {
+    if (kIsWeb) {
+      return web;
+    }
+    switch (defaultTargetPlatform) {
+      case TargetPlatform.android:
+        return android;
+      case TargetPlatform.iOS:
+        return ios;
+      case TargetPlatform.macOS:
+        return macos;
+      case TargetPlatform.windows:
+        return windows;
+      case TargetPlatform.linux:
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for linux - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
+      default:
+        throw UnsupportedError(
+          'DefaultFirebaseOptions are not supported for this platform.',
+        );
+    }
+  }
+
+  static const FirebaseOptions web = FirebaseOptions(
+    apiKey: 'AIzaSyAImoOBjHuV5i2CPDrc6Nszglzl1oisJ4M',
+    appId: '1:351246394074:web:66ff77cf313e9d6076bbe3',
+    messagingSenderId: '351246394074',
+    projectId: 'lovingo-172839',
+    authDomain: 'lovingo-172839.firebaseapp.com',
+    storageBucket: 'lovingo-172839.firebasestorage.app',
+  );
+
+  static const FirebaseOptions android = FirebaseOptions(
+    apiKey: 'AIzaSyCZFFABS4XONKKLkOFv-7CWPvfo4_ZA7XU',
+    appId: '1:351246394074:android:bf5124b876b886e676bbe3',
+    messagingSenderId: '351246394074',
+    projectId: 'lovingo-172839',
+    storageBucket: 'lovingo-172839.firebasestorage.app',
+  );
+
+  static const FirebaseOptions ios = FirebaseOptions(
+    apiKey: 'AIzaSyCY8daWDEb9ZEKiSpEzFB7XnJi-6sxjnaQ',
+    appId: '1:351246394074:ios:43d1bee9c45fc9a676bbe3',
+    messagingSenderId: '351246394074',
+    projectId: 'lovingo-172839',
+    storageBucket: 'lovingo-172839.firebasestorage.app',
+    iosBundleId: 'com.lovingo.app',
+  );
+
+  static const FirebaseOptions macos = FirebaseOptions(
+    apiKey: 'AIzaSyCY8daWDEb9ZEKiSpEzFB7XnJi-6sxjnaQ',
+    appId: '1:351246394074:ios:43d1bee9c45fc9a676bbe3',
+    messagingSenderId: '351246394074',
+    projectId: 'lovingo-172839',
+    storageBucket: 'lovingo-172839.firebasestorage.app',
+    iosBundleId: 'com.lovingo.app',
+  );
+
+  static const FirebaseOptions windows = FirebaseOptions(
+    apiKey: 'AIzaSyAImoOBjHuV5i2CPDrc6Nszglzl1oisJ4M',
+    appId: '1:351246394074:web:8b4e5bdf7ced5a6276bbe3',
+    messagingSenderId: '351246394074',
+    projectId: 'lovingo-172839',
+    authDomain: 'lovingo-172839.firebaseapp.com',
+    storageBucket: 'lovingo-172839.firebasestorage.app',
+  );
+
+}
+
+=== 3. ANALYSE DES SERVICES WEBRTC ===
+
+--- SERVICE: lib/core/services/webrtc_call_service.dart ---
+✅ Méthode createOffer trouvée
+✅ Méthode createAnswer trouvée
+✅ Méthode setLocalDescription trouvée
+✅ Méthode setRemoteDescription trouvée
+⚠️ Méthode addIceCandidate manquante
+📊 Taille: 18015 bytes
+
+--- SERVICE: lib/core/services/signaling_service.dart ---
+⚠️ Méthode createOffer manquante
+⚠️ Méthode createAnswer manquante
+⚠️ Méthode setLocalDescription manquante
+⚠️ Méthode setRemoteDescription manquante
+⚠️ Méthode addIceCandidate manquante
+❌ COMMENTAIRES DE DEBUG TROUVÉS
+
+// lib/core/services/signaling_service.dart - SERVICE DE SIGNALING WEBRTC - CORRIGÉ
+import 'dart:async';
+import 'dart:convert';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:web_socket_channel/web_socket_channel.dart';
+import '../../config/webrtc_config.dart';
+
+final signalingServiceProvider = Provider<SignalingService>((ref) {
+  return SignalingService();
+});
+
+class SignalingService {
+  WebSocketChannel? _channel;
+  bool _isConnected = false;
+  String? _currentUserId;
+  String? _currentRoomId;
+  
+  // Streams pour les événements
+  final StreamController<SignalingMessage> _messageController = StreamController.broadcast();
+  final StreamController<SignalingEvent> _eventController = StreamController.broadcast();
+  final StreamController<bool> _connectionController = StreamController.broadcast();
+  
+  // Getters pour les streams
+  Stream<SignalingMessage> get messageStream => _messageController.stream;
+  Stream<SignalingEvent> get eventStream => _eventController.stream;
+  Stream<bool> get connectionStream => _connectionController.stream;
+  
+  bool get isConnected => _isConnected;
+  String? get currentRoomId => _currentRoomId;
+
+  // ✅ CONNEXION AU SERVEUR DE SIGNALING
+  Future<bool> connect(String userId) async {
+    try {
+      if (_isConnected) {
+        WebRTCConfig.logInfo('Déjà connecté au signaling server');
+        return true;
+      }
+
+      _currentUserId = userId;
+      WebRTCConfig.logInfo('Connexion au signaling server...');
+      
+      // Connexion WebSocket avec authentification
+      final uri = Uri.parse('${WebRTCConfig.signalingServerUrl}?userId=$userId');
+      _channel = WebSocketChannel.connect(uri);
+      
+      // Écouter les messages
+      _channel!.stream.listen(
+        _handleMessage,
+        onError: _handleError,
+        onDone: _handleDisconnection,
+      );
+      
+      // Attendre la confirmation de connexion (timeout 10s)
+      final completer = Completer<bool>();
+      Timer? timeoutTimer;
+      
+      late StreamSubscription subscription;
+      subscription = eventStream.listen((event) {
+        if (event.type == SignalingEventType.connected) {
+          timeoutTimer?.cancel();
+          subscription.cancel();
+          completer.complete(true);
+        } else if (event.type == SignalingEventType.error) {
+          timeoutTimer?.cancel();
+          subscription.cancel();
+          completer.complete(false);
+        }
+      });
+      
+      timeoutTimer = Timer(const Duration(seconds: 10), () {
+        subscription.cancel();
+        if (!completer.isCompleted) {
+          completer.complete(false);
+        }
+      });
+      
+      return await completer.future;
+    } catch (e) {
+      WebRTCConfig.logError('Erreur connexion signaling', e);
+      return false;
+    }
+  }
+
+  // ✅ REJOINDRE UNE ROOM (APPEL 1-TO-1 OU LIVE) - CORRIGÉ
+  Future<bool> joinRoom({
+    required String roomId,
+    required WebRTCCallType callType, // ✅ CORRIGÉ : WebRTCCallType au lieu de CallType
+    Map<String, dynamic>? metadata,
+  }) async {
+    try {
+      if (!_isConnected) {
+        WebRTCConfig.logError('Pas connecté au signaling server');
+        return false;
+      }
+
+      _currentRoomId = roomId;
+      
+      final message = SignalingMessage(
+        type: SignalingMessageType.joinRoom,
+        from: _currentUserId!,
+        to: roomId,
+        data: {
+          'callType': callType.name,
+          'metadata': metadata ?? {},
+          'timestamp': DateTime.now().millisecondsSinceEpoch,
+        },
+      );
+      
+      _sendMessage(message);
+      WebRTCConfig.logInfo('Demande de rejoindre room: $roomId');
+      return true;
+    } catch (e) {
+      WebRTCConfig.logError('Erreur rejoindre room', e);
+      return false;
+    }
+  }
+
+  // ✅ QUITTER UNE ROOM
+  Future<void> leaveRoom() async {
+    try {
+      if (_currentRoomId != null && _isConnected) {
+        final message = SignalingMessage(
+          type: SignalingMessageType.leaveRoom,
+          from: _currentUserId!,
+          to: _currentRoomId!,
+          data: {
+            'timestamp': DateTime.now().millisecondsSinceEpoch,
+          },
+        );
+        
+        _sendMessage(message);
+        WebRTCConfig.logInfo('Quitter room: $_currentRoomId');
+      }
+      
+      _currentRoomId = null;
+    } catch (e) {
+      WebRTCConfig.logError('Erreur quitter room', e);
+    }
+  }
+
+  // ✅ ENVOYER UNE OFFRE SDP
+  Future<void> sendOffer({
+    required String targetUserId,
+    required Map<String, dynamic> sdp,
+  }) async {
+    final message = SignalingMessage(
+      type: SignalingMessageType.offer,
+      from: _currentUserId!,
+      to: targetUserId,
+      data: {'sdp': sdp},
+    );
+    
+    _sendMessage(message);
+    WebRTCConfig.logInfo('Offre SDP envoyée à $targetUserId');
+  }
+
+  // ✅ ENVOYER UNE RÉPONSE SDP
+  Future<void> sendAnswer({
+    required String targetUserId,
+    required Map<String, dynamic> sdp,
+  }) async {
+    final message = SignalingMessage(
+      type: SignalingMessageType.answer,
+      from: _currentUserId!,
+      to: targetUserId,
+      data: {'sdp': sdp},
+    );
+    
+    _sendMessage(message);
+    WebRTCConfig.logInfo('Réponse SDP envoyée à $targetUserId');
+  }
+
+  // ✅ ENVOYER UN CANDIDAT ICE
+  Future<void> sendIceCandidate({
+    required String targetUserId,
+    required Map<String, dynamic> candidate,
+  }) async {
+    final message = SignalingMessage(
+      type: SignalingMessageType.iceCandidate,
+      from: _currentUserId!,
+      to: targetUserId,
+      data: {'candidate': candidate},
+    );
+    
+    _sendMessage(message);
+    WebRTCConfig.logInfo('Candidat ICE envoyé à $targetUserId');
+  }
+
+  // ✅ ENVOYER UN MESSAGE DE CONTRÔLE LIVE
+  Future<void> sendLiveControlMessage({
+    required String roomId,
+    required LiveControlType controlType,
+    Map<String, dynamic>? data,
+  }) async {
+    final message = SignalingMessage(
+      type: SignalingMessageType.liveControl,
+      from: _currentUserId!,
+      to: roomId,
+      data: {
+        'controlType': controlType.name,
+        'data': data ?? {},
+        'timestamp': DateTime.now().millisecondsSinceEpoch,
+      },
+    );
+    
+    _sendMessage(message);
+    WebRTCConfig.logInfo('Message live control envoyé: ${controlType.name}');
+  }
+
+  // ✅ ENVOYER UN CADEAU VIRTUEL
+  Future<void> sendVirtualGift({
+    required String roomId,
+    required String giftId,
+    required int quantity,
+    String? targetUserId,
+  }) async {
+    final message = SignalingMessage(
+      type: SignalingMessageType.virtualGift,
+      from: _currentUserId!,
+      to: roomId,
+      data: {
+        'giftId': giftId,
+        'quantity': quantity,
+        'targetUserId': targetUserId,
+        'timestamp': DateTime.now().millisecondsSinceEpoch,
+      },
+    );
+    
+    _sendMessage(message);
+    WebRTCConfig.logInfo('Cadeau virtuel envoyé: $giftId x$quantity');
+  }
+
+  // ✅ ENVOYER UN MESSAGE DE CHAT LIVE
+  Future<void> sendLiveChat({
+    required String roomId,
+    required String message,
+  }) async {
+    final signalingMessage = SignalingMessage(
+      type: SignalingMessageType.liveChat,
+      from: _currentUserId!,
+      to: roomId,
+      data: {
+        'message': message,
+        'timestamp': DateTime.now().millisecondsSinceEpoch,
+      },
+    );
+    
+    _sendMessage(signalingMessage);
+  }
+
+  // ✅ ENVOYER UN HEARTBEAT
+  void sendHeartbeat() {
+    if (_isConnected) {
+      final message = SignalingMessage(
+        type: SignalingMessageType.heartbeat,
+        from: _currentUserId!,
+        to: 'server',
+        data: {
+          'timestamp': DateTime.now().millisecondsSinceEpoch,
+          'roomId': _currentRoomId,
+        },
+      );
+      
+      _sendMessage(message);
+    }
+  }
+
+  // ✅ GESTION DES MESSAGES ENTRANTS
+  void _handleMessage(dynamic data) {
+    try {
+      final Map<String, dynamic> json = jsonDecode(data);
+      final message = SignalingMessage.fromJson(json);
+      
+      WebRTCConfig.logInfo('Message reçu: ${message.type.name} de ${message.from}');
+      
+      // Traiter les événements spéciaux
+      switch (message.type) {
+        case SignalingMessageType.connected:
+          _isConnected = true;
+          _connectionController.add(true);
+          _eventController.add(SignalingEvent(
+            type: SignalingEventType.connected,
+            data: message.data,
+          ));
+          break;
+          
+        case SignalingMessageType.roomJoined:
+          _eventController.add(SignalingEvent(
+            type: SignalingEventType.roomJoined,
+            data: message.data,
+          ));
+          break;
+          
+        case SignalingMessageType.userJoined:
+          _eventController.add(SignalingEvent(
+            type: SignalingEventType.userJoined,
+            data: message.data,
+          ));
+          break;
+          
+        case SignalingMessageType.userLeft:
+          _eventController.add(SignalingEvent(
+            type: SignalingEventType.userLeft,
+            data: message.data,
+          ));
+          break;
+          
+        case SignalingMessageType.error:
+          _eventController.add(SignalingEvent(
+            type: SignalingEventType.error,
+            data: message.data,
+          ));
+          break;
+          
+        default:
+          // Transmettre le message aux listeners
+          _messageController.add(message);
+      }
+    } catch (e) {
+      WebRTCConfig.logError('Erreur traitement message', e);
+    }
+  }
+
+  // ✅ GESTION DES ERREURS - AMÉLIORÉE POUR DEBUG
+  void _handleError(dynamic error) {
+    WebRTCConfig.logError('Erreur WebSocket', error);
+    // 🚨 DEBUG : Afficher l'erreur détaillée
+    WebRTCConfig.logError('🚨 ERREUR SIGNALING DÉTAILLÉE: $error');
+    WebRTCConfig.logError('🔗 URL tentée: ${WebRTCConfig.signalingServerUrl}');
+    
+    _isConnected = false;
+    _connectionController.add(false);
+    _eventController.add(SignalingEvent(
+      type: SignalingEventType.error,
+      data: {'error': error.toString()},
+    ));
+  }
+
+  // ✅ GESTION DE LA DÉCONNEXION
+  void _handleDisconnection() {
+    WebRTCConfig.logInfo('Déconnexion du signaling server');
+    _isConnected = false;
+    _currentRoomId = null;
+    _connectionController.add(false);
+    _eventController.add(SignalingEvent(
+      type: SignalingEventType.disconnected,
+      data: {},
+    ));
+  }
+
+  // ✅ ENVOYER UN MESSAGE
+  void _sendMessage(SignalingMessage message) {
+    if (_channel != null && _isConnected) {
+      final json = jsonEncode(message.toJson());
+      _channel!.sink.add(json);
+    }
+  }
+
+  // ✅ DÉCONNEXION
+  Future<void> disconnect() async {
+    try {
+      await leaveRoom();
+      
+      if (_channel != null) {
+        await _channel!.sink.close();
+        _channel = null;
+      }
+      
+      _isConnected = false;
+      _currentUserId = null;
+      _currentRoomId = null;
+      
+      WebRTCConfig.logInfo('Déconnecté du signaling server');
+    } catch (e) {
+      WebRTCConfig.logError('Erreur déconnexion', e);
+    }
+  }
+
+  // ✅ NETTOYAGE
+  void dispose() {
+    disconnect();
+    _messageController.close();
+    _eventController.close();
+    _connectionController.close();
+  }
+}
+
+// ✅ MODÈLE DE MESSAGE DE SIGNALING
+class SignalingMessage {
+  final SignalingMessageType type;
+  final String from;
+  final String to;
+  final Map<String, dynamic> data;
+  final DateTime timestamp;
+
+  SignalingMessage({
+    required this.type,
+    required this.from,
+    required this.to,
+    required this.data,
+  }) : timestamp = DateTime.now();
+
+  Map<String, dynamic> toJson() => {
+    'type': type.name,
+    'from': from,
+    'to': to,
+    'data': data,
+    'timestamp': timestamp.millisecondsSinceEpoch,
+  };
+
+  factory SignalingMessage.fromJson(Map<String, dynamic> json) {
+    return SignalingMessage(
+      type: SignalingMessageType.values.firstWhere(
+        (e) => e.name == json['type'],
+        orElse: () => SignalingMessageType.unknown,
+      ),
+      from: json['from'] ?? '',
+      to: json['to'] ?? '',
+      data: Map<String, dynamic>.from(json['data'] ?? {}),
+    );
+  }
+}
+
+// ✅ MODÈLE D'ÉVÉNEMENT DE SIGNALING
+class SignalingEvent {
+  final SignalingEventType type;
+  final Map<String, dynamic> data;
+  final DateTime timestamp;
+
+  SignalingEvent({
+    required this.type,
+    required this.data,
+  }) : timestamp = DateTime.now();
+}
+
+// ✅ TYPES DE MESSAGES DE SIGNALING
+enum SignalingMessageType {
+  // Connexion
+  connected,
+  disconnected,
+  heartbeat,
+  
+  // Room management
+  joinRoom,
+  leaveRoom,
+  roomJoined,
+  roomLeft,
+  userJoined,
+  userLeft,
+  
+  // WebRTC signaling
+  offer,
+  answer,
+  iceCandidate,
+  
+  // Live streaming
+  liveControl,
+  liveChat,
+  virtualGift,
+  liveStats,
+  
+  // Erreurs
+  error,
+  unknown,
+}
+
+// ✅ TYPES D'ÉVÉNEMENTS DE SIGNALING
+enum SignalingEventType {
+  connected,
+  disconnected,
+  roomJoined,
+  userJoined,
+  userLeft,
+  error,
+}
+
+// ✅ TYPES DE CONTRÔLE LIVE
+enum LiveControlType {
+  startLive,
+  endLive,
+  inviteGuest,
+  acceptInvite,
+  declineInvite,
+  removeGuest,
+  muteGuest,
+  unmuteGuest,
+  promoteGuest,
+  demoteGuest,
+  changeLiveSettings,
+}
+
+📊 Taille: 13558 bytes
+
+--- SERVICE: lib/core/services/live_streaming_service.dart ---
+⚠️ Méthode createOffer manquante
+⚠️ Méthode createAnswer manquante
+⚠️ Méthode setLocalDescription manquante
+⚠️ Méthode setRemoteDescription manquante
+⚠️ Méthode addIceCandidate manquante
+📊 Taille: 24612 bytes
+
+--- SERVICE: lib/core/services/audio_service.dart ---
+⚠️ Méthode createOffer manquante
+⚠️ Méthode createAnswer manquante
+⚠️ Méthode setLocalDescription manquante
+⚠️ Méthode setRemoteDescription manquante
+⚠️ Méthode addIceCandidate manquante
+📊 Taille: 17426 bytes
+
+=== 4. ANALYSE DES MODÈLES ===
+✅ Champ callId présent
+⚠️ Champ callerUserId manquant
+⚠️ Champ calleeUserId manquant
+✅ Champ callType présent
+✅ Champ status présent
+
+=== 5. ANALYSE DES PERMISSIONS ===
+✅ Permission Android: android.permission.CAMERA
+✅ Permission Android: android.permission.RECORD_AUDIO
+✅ Permission Android: android.permission.INTERNET
+✅ Permission Android: android.permission.ACCESS_NETWORK_STATE
+❌ PERMISSION iOS CAMÉRA MANQUANTE!
+❌ PERMISSION iOS MICROPHONE MANQUANTE!
+
+=== 6. ERREURS COMMUNES DÉTECTÉES ===
+⚠️ Pattern 'Exception' trouvé dans:
+   - webrtc_config.dart:221
+   - webrtc_config.dart:231
+   - chat_service.dart:88
+   - chat_service.dart:204
+   - chat_service.dart:230
+   - localization_service.dart:120
+   - localization_service.dart:125
+   - profile_service.dart:105
+   - profile_service.dart:131
+   - profile_service.dart:143
+   - profile_service.dart:165
+   - profile_service.dart:210
+   - profile_service.dart:232
+   - profile_service.dart:256
+   - profile_service.dart:284
+   - profile_service.dart:289
+   - profile_service.dart:294
+   - profile_service.dart:299
+   - profile_service.dart:304
+   - profile_service.dart:309
+   - profile_service.dart:326
+   - call_provider.dart:145
+   - call_provider.dart:210
+   - call_provider.dart:461
+   - profile_screen.dart:2010
+⚠️ Pattern 'Error' trouvé dans:
+   - firebase_options.dart:32
+   - firebase_options.dart:37
+   - main.dart:308
+   - main.dart:454
+   - firebase_config.dart:11
+   - webrtc_config.dart:208
+   - webrtc_config.dart:213
+   - webrtc_config.dart:271
+   - webrtc_config.dart:273
+   - webrtc_config.dart:274
+   - webrtc_config.dart:275
+   - webrtc_config.dart:298
+   - webrtc_config.dart:305
+   - providers.dart:14
+   - providers.dart:19
+   - providers.dart:25
+   - providers.dart:30
+   - providers.dart:39
+   - providers.dart:44
+   - providers.dart:50
+   - providers.dart:55
+   - admin_service.dart:314
+   - audio_service.dart:47
+   - audio_service.dart:90
+   - audio_service.dart:126
+   - audio_service.dart:137
+   - audio_service.dart:147
+   - audio_service.dart:148
+   - audio_service.dart:189
+   - audio_service.dart:190
+   - audio_service.dart:219
+   - audio_service.dart:254
+   - audio_service.dart:264
+   - audio_service.dart:279
+   - audio_service.dart:321
+   - audio_service.dart:368
+   - audio_service.dart:403
+   - audio_service.dart:432
+   - audio_service.dart:450
+   - audio_service.dart:498
+   - auth_service.dart:18
+   - auth_service.dart:24
+   - auth_service.dart:31
+   - auth_service.dart:37
+   - auth_service.dart:218
+   - auth_service.dart:224
+   - auth_service.dart:246
+   - auth_service.dart:317
+   - auth_service.dart:333
+   - call_history_service.dart:74
+   - call_history_service.dart:131
+   - call_history_service.dart:184
+   - call_history_service.dart:306
+   - call_history_service.dart:325
+   - call_history_service.dart:358
+   - call_history_service.dart:381
+   - call_history_service.dart:408
+   - call_history_service.dart:451
+   - call_recording_service.dart:71
+   - call_recording_service.dart:87
+   - call_recording_service.dart:107
+   - call_recording_service.dart:114
+   - call_recording_service.dart:160
+   - call_recording_service.dart:169
+   - call_recording_service.dart:215
+   - call_recording_service.dart:231
+   - call_recording_service.dart:246
+   - call_recording_service.dart:259
+   - call_recording_service.dart:275
+   - call_recording_service.dart:306
+   - call_recording_service.dart:323
+   - call_recording_service.dart:333
+   - call_recording_service.dart:436
+   - call_recording_service.dart:474
+   - call_recording_service.dart:566
+   - call_recording_service.dart:599
+   - call_recording_service.dart:618
+   - call_recording_service.dart:637
+   - call_recording_service.dart:638
+   - discovery_service.dart:12
+   - discovery_service.dart:17
+   - discovery_service.dart:23
+   - discovery_service.dart:28
+   - discovery_service.dart:60
+   - live_streaming_service.dart:96
+   - live_streaming_service.dart:106
+   - live_streaming_service.dart:125
+   - live_streaming_service.dart:137
+   - live_streaming_service.dart:156
+   - live_streaming_service.dart:165
+   - live_streaming_service.dart:177
+   - live_streaming_service.dart:189
+   - live_streaming_service.dart:201
+   - live_streaming_service.dart:206
+   - live_streaming_service.dart:236
+   - live_streaming_service.dart:255
+   - live_streaming_service.dart:290
+   - live_streaming_service.dart:335
+   - live_streaming_service.dart:366
+   - live_streaming_service.dart:406
+   - live_streaming_service.dart:459
+   - localization_service.dart:58
+   - localization_service.dart:65
+   - localization_service.dart:73
+   - localization_service.dart:80
+   - localization_service.dart:325
+   - localization_service.dart:336
+   - localization_service.dart:347
+   - localization_service.dart:362
+   - localization_service.dart:367
+   - localization_service.dart:373
+   - localization_service.dart:379
+   - profile_service.dart:20
+   - profile_service.dart:26
+   - profile_service.dart:33
+   - profile_service.dart:39
+   - profile_service.dart:50
+   - profile_service.dart:57
+   - profile_service.dart:58
+   - profile_service.dart:62
+   - signaling_service.dart:49
+   - signaling_service.dart:63
+   - signaling_service.dart:79
+   - signaling_service.dart:92
+   - signaling_service.dart:113
+   - signaling_service.dart:137
+   - signaling_service.dart:308
+   - signaling_service.dart:310
+   - signaling_service.dart:320
+   - signaling_service.dart:325
+   - signaling_service.dart:326
+   - signaling_service.dart:328
+   - signaling_service.dart:329
+   - signaling_service.dart:334
+   - signaling_service.dart:335
+   - signaling_service.dart:375
+   - signaling_service.dart:463
+   - signaling_service.dart:474
+   - virtual_gifts_service.dart:51
+   - virtual_gifts_service.dart:77
+   - virtual_gifts_service.dart:95
+   - virtual_gifts_service.dart:102
+   - virtual_gifts_service.dart:109
+   - virtual_gifts_service.dart:168
+   - virtual_gifts_service.dart:203
+   - virtual_gifts_service.dart:248
+   - virtual_gifts_service.dart:286
+   - virtual_gifts_service.dart:336
+   - virtual_gifts_service.dart:490
+   - wallet_service.dart:57
+   - wallet_service.dart:83
+   - wallet_service.dart:111
+   - wallet_service.dart:128
+   - wallet_service.dart:155
+   - wallet_service.dart:172
+   - wallet_service.dart:179
+   - wallet_service.dart:205
+   - wallet_service.dart:223
+   - wallet_service.dart:250
+   - wallet_service.dart:267
+   - wallet_service.dart:274
+   - wallet_service.dart:281
+   - wallet_service.dart:316
+   - wallet_service.dart:368
+   - wallet_service.dart:421
+   - wallet_service.dart:453
+   - webrtc_call_service.dart:31
+   - webrtc_call_service.dart:69
+   - webrtc_call_service.dart:93
+   - webrtc_call_service.dart:103
+   - webrtc_call_service.dart:115
+   - webrtc_call_service.dart:125
+   - webrtc_call_service.dart:151
+   - webrtc_call_service.dart:215
+   - webrtc_call_service.dart:242
+   - webrtc_call_service.dart:277
+   - webrtc_call_service.dart:291
+   - webrtc_call_service.dart:292
+   - webrtc_call_service.dart:293
+   - webrtc_call_service.dart:317
+   - webrtc_call_service.dart:346
+   - webrtc_call_service.dart:365
+   - webrtc_call_service.dart:386
+   - webrtc_call_service.dart:440
+   - webrtc_call_service.dart:470
+   - webrtc_call_service.dart:527
+   - admin_dashboard.dart:89
+   - admin_dashboard.dart:94
+   - admin_dashboard.dart:99
+   - login_screen.dart:39
+   - login_screen.dart:42
+   - login_screen.dart:405
+   - register_screen.dart:43
+   - register_screen.dart:46
+   - call_history_screen.dart:184
+   - call_history_screen.dart:186
+   - call_history_screen.dart:305
+   - call_history_screen.dart:309
+   - call_history_screen.dart:311
+   - call_history_screen.dart:511
+   - incoming_call_screen.dart:135
+   - incoming_call_screen.dart:214
+   - live_streaming_screen.dart:86
+   - live_streaming_screen.dart:152
+   - live_streaming_screen.dart:160
+   - live_streaming_screen.dart:187
+   - live_streaming_screen.dart:205
+   - live_streaming_screen.dart:210
+   - live_streaming_screen.dart:211
+   - live_streaming_screen.dart:222
+   - live_streaming_screen.dart:252
+   - live_streaming_screen.dart:699
+   - live_streaming_screen.dart:719
+   - live_streaming_screen.dart:774
+   - live_streaming_screen.dart:873
+   - live_streaming_screen.dart:880
+   - webrtc_audio_call_screen.dart:91
+   - webrtc_audio_call_screen.dart:98
+   - webrtc_audio_call_screen.dart:105
+   - webrtc_audio_call_screen.dart:125
+   - webrtc_audio_call_screen.dart:136
+   - webrtc_audio_call_screen.dart:137
+   - webrtc_audio_call_screen.dart:179
+   - webrtc_audio_call_screen.dart:185
+   - webrtc_audio_call_screen.dart:186
+   - webrtc_audio_call_screen.dart:188
+   - webrtc_audio_call_screen.dart:202
+   - webrtc_audio_call_screen.dart:741
+   - webrtc_video_call_screen.dart:74
+   - webrtc_video_call_screen.dart:84
+   - webrtc_video_call_screen.dart:96
+   - webrtc_video_call_screen.dart:103
+   - webrtc_video_call_screen.dart:123
+   - webrtc_video_call_screen.dart:134
+   - webrtc_video_call_screen.dart:136
+   - webrtc_video_call_screen.dart:183
+   - webrtc_video_call_screen.dart:189
+   - webrtc_video_call_screen.dart:190
+   - webrtc_video_call_screen.dart:192
+   - webrtc_video_call_screen.dart:226
+   - webrtc_video_call_screen.dart:759
+   - webrtc_video_call_screen.dart:785
+   - call_provider.dart:66
+   - call_provider.dart:74
+   - call_provider.dart:83
+   - call_provider.dart:91
+   - call_provider.dart:141
+   - call_provider.dart:191
+   - call_provider.dart:194
+   - call_provider.dart:206
+   - call_provider.dart:256
+   - call_provider.dart:259
+   - call_provider.dart:301
+   - call_provider.dart:347
+   - call_provider.dart:366
+   - call_provider.dart:390
+   - call_provider.dart:429
+   - call_provider.dart:473
+   - call_provider.dart:474
+   - call_provider.dart:496
+   - call_provider.dart:518
+   - call_provider.dart:523
+   - call_provider.dart:524
+   - call_provider.dart:542
+   - chat_list_screen.dart:67
+   - chat_list_screen.dart:96
+   - chat_list_screen.dart:149
+   - chat_list_screen.dart:274
+   - chat_list_screen.dart:282
+   - chat_list_screen.dart:322
+   - chat_list_screen.dart:328
+   - chat_list_screen.dart:342
+   - chat_screen.dart:143
+   - chat_screen.dart:295
+   - chat_screen.dart:299
+   - chat_screen.dart:301
+   - chat_screen.dart:465
+   - chat_screen.dart:467
+   - chat_screen.dart:520
+   - chat_screen.dart:522
+   - demo_screen.dart:226
+   - demo_screen.dart:492
+   - profile_screen.dart:472
+   - profile_screen.dart:1288
+   - profile_screen.dart:1307
+   - profile_screen.dart:1484
+   - profile_screen.dart:1485
+   - profile_screen.dart:1665
+   - profile_screen.dart:1668
+   - profile_screen.dart:1904
+   - profile_screen.dart:1956
+   - profile_screen.dart:1986
+   - profile_screen.dart:2115
+   - profile_screen.dart:2117
+   - profile_screen.dart:2119
+   - profile_screen.dart:2122
+   - profile_screen.dart:2123
+   - profile_screen.dart:2127
+   - profile_screen.dart:2147
+   - profile_screen.dart:2189
+   - profile_screen.dart:2190
+   - profile_screen.dart:2192
+   - profile_screen.dart:2194
+   - profile_screen.dart:2196
+   - profile_screen.dart:2229
+   - profile_screen.dart:2302
+   - profile_screen.dart:2402
+   - user_details_screen.dart:134
+   - user_details_screen.dart:137
+   - user_details_screen.dart:600
+   - user_details_screen.dart:695
+   - user_details_screen.dart:723
+   - app_theme.dart:11
+   - app_theme.dart:38
+   - app_theme.dart:43
+   - app_theme.dart:135
+   - app_theme.dart:140
+   - discovery_states.dart:77
+   - discovery_states.dart:78
+   - discovery_states.dart:81
+   - discovery_states.dart:83
+   - discovery_states.dart:94
+   - discovery_states.dart:108
+   - empty_states.dart:52
+   - empty_states.dart:55
+   - empty_states.dart:67
+   - user_card.dart:147
+   - user_card.dart:150
+⚠️ Pattern 'Failed' trouvé dans:
+   - webrtc_config.dart:334
+   - call_model.dart:167
+   - call_model.dart:168
+   - call_model.dart:197
+   - call_model.dart:214
+   - call_model.dart:232
+   - call_model.g.dart:57
+   - transaction_model.dart:50
+   - transaction_model.dart:51
+   - transaction_model.g.dart:43
+   - call_history_service.dart:458
+   - call_history_service.dart:649
+   - call_history_service.dart:665
+   - call_history_service.dart:682
+   - call_history_service.dart:700
+   - call_recording_service.dart:546
+   - call_recording_service.dart:572
+   - virtual_gifts_service.dart:769
+   - webrtc_call_service.dart:202
+   - webrtc_call_service.dart:203
+   - webrtc_audio_call_screen.dart:178
+   - webrtc_audio_call_screen.dart:624
+   - webrtc_audio_call_screen.dart:640
+   - webrtc_audio_call_screen.dart:655
+   - webrtc_video_call_screen.dart:182
+   - webrtc_video_call_screen.dart:616
+   - webrtc_video_call_screen.dart:632
+   - webrtc_video_call_screen.dart:647
+
+=== 7. RÉSUMÉ ET RECOMMANDATIONS ===
+
+🔥 PROBLÈMES CRITIQUES À RÉSOUDRE:
+
+==========================================
+ANALYSE TERMINÉE - Voir le fichier: analyse_problemes_webrtc.txt
+==========================================

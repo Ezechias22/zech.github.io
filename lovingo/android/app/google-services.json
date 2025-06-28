@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "351246394074",
+    "project_id": "lovingo-172839",
+    "storage_bucket": "lovingo-172839.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:351246394074:android:bf5124b876b886e676bbe3",
+        "android_client_info": {
+          "package_name": "com.lovingo.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCZFFABS4XONKKLkOFv-7CWPvfo4_ZA7XU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

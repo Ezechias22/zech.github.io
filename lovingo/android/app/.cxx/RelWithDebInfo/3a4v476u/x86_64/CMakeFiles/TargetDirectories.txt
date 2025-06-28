@@ -1,0 +1,2 @@
+C:/Users/touss/lovingo/android/app/.cxx/RelWithDebInfo/3a4v476u/x86_64/CMakeFiles/edit_cache.dir
+C:/Users/touss/lovingo/android/app/.cxx/RelWithDebInfo/3a4v476u/x86_64/CMakeFiles/rebuild_cache.dir
